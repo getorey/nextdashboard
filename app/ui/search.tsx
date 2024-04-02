@@ -9,21 +9,20 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  function HandleSearch(term: string){
+  //function HandleSearch(term: string) {
+  const handleSearch = useDebouncedCallback((term) => {
+    console.log(`searching... ${term}`);      
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set('query', term);
+    } else {
+      params.delete('query');
+    }
+    
+    replace(`${pathname}?${params.toString()}`);
+    console.log(term);
+  }, 300);
   
-    const handleSearch = useDebouncedCallback((term) => {
-      console.log(`searching... ${term}`);
-      const params = new URLSearchParams(searchParams);
-      if (term) {
-        params.set('query', term);
-      } else {
-        params.delete('query');
-      }
-      
-      replace(`${pathname}?${params.toString()}`);
-      console.log(term);
-    }, 300);
-  }
 
   return (
     <div className="relative flex flex-1 flex-shrink-0">
@@ -34,7 +33,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
         className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
         placeholder={placeholder}
         onChange={(e) => {
-          HandleSearch(e.target.value);
+          handleSearch(e.target.value);
         }}
         defaultValue={searchParams.get('query')?.toString()}
       />
