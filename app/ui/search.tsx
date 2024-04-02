@@ -22,8 +22,8 @@ export default function Search({ placeholder }: { placeholder: string }) {
       
       replace(`${pathname}?${params.toString()}`);
       console.log(term);
-    }, 300);
-  }
+    }, 300)
+  };
 
   return (
     <div className="relative flex flex-1 flex-shrink-0">
