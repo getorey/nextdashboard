@@ -109,7 +109,7 @@ export async function deleteInvoice(id: string) {
 
 
 
-export async functon authenticate(
+export async function authenticate(
     prevState: string | undefined,
     fromData: FormData,
 ){
