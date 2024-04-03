@@ -114,7 +114,7 @@ export async function authenticate(
     fromData: FormData,
 ){
     try{
-        await signIn('credentials', formData);
+        await signIn('credentials', fromData);
     } catch(error) {
         if (error instanceof AuthError) {
             switch (error.type) {
